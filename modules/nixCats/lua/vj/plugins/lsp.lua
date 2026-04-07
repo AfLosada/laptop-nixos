@@ -93,7 +93,6 @@ return {
             'svelte',
           },
         },
-        prismals = {},
       }
 
       -- LSP setup based on environment (Nix vs non-Nix)

@@ -66,7 +66,7 @@
           pylint
           nodePackages.eslint
           emmet-ls
-          nodePackages."@prisma/language-server"
+          nodePackages."@prisma/client"
 
         ];
       };

@@ -128,11 +128,9 @@
               nodePackages.vscode-langservers-extracted # for html, cssls, etc.
               nodePackages.svelte-language-server
               nodePackages.graphql-language-service-cli
-              nodePackages."@tailwindcss/language-server"
               pyright
               pylint
               black
-              nodePackages.prettier
               djlint
               yamlfmt
               rustfmt
@@ -143,9 +141,7 @@
               nixfmt-rfc-style
               taplo
               pgformatter
-              nodePackages.eslint
               emmet-ls
-              nodePackages."@prisma/language-server"
             ];
             kickstart-debug = [
               delve

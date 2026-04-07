@@ -4,8 +4,8 @@
   pkgs,
   ...
 }: let
-  userName = "polillaoscura";
-  userDescription = "Andres Losada";
+  userName = "nixos";
+  userDescription = "Polilla Oscura";
 in {
   options = {
   };

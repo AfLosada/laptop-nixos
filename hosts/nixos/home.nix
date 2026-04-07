@@ -3,9 +3,9 @@
   pkgs,
   ...
 }: let
-  userName = "polillaoscura";
+  userName = "nixos";
   homeDirectory = "/home/${userName}";
-  stateVersion = "25.11";
+  stateVersion = "24.05";
 in {
   home = {
     username = userName;

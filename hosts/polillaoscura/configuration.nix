@@ -10,8 +10,8 @@ let
   username = "polillaoscura";
   userDescription = "Andres Losada";
   homeDirectory = "/home/${username}";
-  hostName = "polillaoscura";
-  timeZone = "America/Bogota";
+  hostName = "rudra";
+  timeZone = "Asia/Kolkata";
 in
 {
   imports = [
@@ -145,13 +145,21 @@ in
     docker = {
       enable = true;
     };
+    libvirtd = {
+      enable = true;
+      qemu = {
+        swtpm.enable = true;
+        ovmf.enable = true;
+        runAsRoot = true;
+      };
+    };
     spiceUSBRedirection.enable = true;
   };
 
   programs = {
     nix-ld = {
       enable = true;
-      package = pkgs.nix-ld;
+      package = pkgs.nix-ld-rs;
     };
     firefox.enable = false;
     dconf.enable = true;
@@ -191,6 +199,8 @@ in
     # Text editors and IDEs
     nano
     vscode
+    zed-editor
+    jetbrains.idea-ultimate
 
     # Zen Browser from custom input
     inputs.zen-browser.packages."${system}".default
@@ -209,12 +219,15 @@ in
     clang
     zig
     rustup
+    nodePackages_latest.pnpm
+    nodePackages_latest.yarn
     fnm
     bun
     maven
     mongodb-compass
     gcc
     openssl
+    nodePackages_latest.live-server
 
     # Frappe Bench
     redis
@@ -252,6 +265,7 @@ in
     alacritty
     exfatprogs
 
+    inputs.nixCats.packages.${pkgs.system}.nvim
     # inputs.ghostty.packages.${pkgs.system}.default
 
     # File management and archives
@@ -269,6 +283,8 @@ in
     btop
     lm_sensors
     inxi
+    # nvtopPackages.nvidia
+    anydesk
 
     # Network and internet tools
     aria2
@@ -295,6 +311,8 @@ in
 
     # Productivity and office
     obsidian
+    onlyoffice-bin
+    libreoffice-qt6-fresh
     spacedrive
     hugo
 
@@ -306,10 +324,11 @@ in
 
     # Browsers
     firefox
+    google-chrome
     tor-browser
-    chromium
 
     # Gaming and entertainment
+    stremio
 
     # System utilities
     libgcc
@@ -378,6 +397,7 @@ in
 
     # Education
     wireshark
+    ventoy
 
     # Music and streaming
     youtube-music
@@ -397,7 +417,7 @@ in
   '';
 
   fonts.packages = with pkgs; [
-    noto-fonts-color-emoji
+    noto-fonts-emoji
     fira-sans
     roboto
     noto-fonts-cjk-sans
@@ -423,7 +443,7 @@ in
     xserver = {
       enable = false;
       xkb = {
-        layout = "latam";
+        layout = "us";
         variant = "";
       };
       videoDrivers = [ "modesetting" ];
@@ -443,7 +463,11 @@ in
     #     };
     #   };
     # };
-    
+    logind = {
+      extraConfig = ''
+        HandlePowerKey=suspend
+      '';
+    };
     cloudflare-warp.enable = true;
     # supergfxd.enable = true;
     # asusd = {
@@ -467,6 +491,10 @@ in
     gvfs.enable = true;
     openssh.enable = true;
     flatpak.enable = true;
+    printing = {
+      enable = true;
+      drivers = [ pkgs.hplipWithPlugin ];
+    };
     power-profiles-daemon.enable = false;
     thermald.enable = true;
     auto-cpufreq = {
@@ -656,5 +684,5 @@ in
     backupFileExtension = "backup";
   };
 
-  system.stateVersion = "25.11";
+  system.stateVersion = "24.05";
 }
