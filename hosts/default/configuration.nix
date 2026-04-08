@@ -367,14 +367,11 @@ in
     cliphist
 
     # Fun and customization
-    cmatrix
-    lolcat
     fastfetch
-    onefetch
-    microfetch
 
     # Networking
     networkmanagerapplet
+    nordvpn
 
     # Education
     wireshark
