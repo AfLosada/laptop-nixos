@@ -383,6 +383,9 @@ in
     youtube-music
     spotify
 
+    #Friends
+    discord
+
     # Miscellaneous
     greetd.tuigreet
     customSddmTheme
