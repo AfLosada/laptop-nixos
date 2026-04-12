@@ -153,6 +153,16 @@ in
       enable = true;
       package = pkgs.nix-ld;
     };
+    uwsm = {
+      enable = true;
+      waylandCompositors = {
+        hyprland = {
+          prettyName = "Hyprland";
+          comment = "Hyprland compositor managed by UWSM";
+          binPath = "/run/current-system/sw/bin/Hyprland";
+        };
+      };
+    };
     firefox.enable = false;
     dconf.enable = true;
     fuse.userAllowOther = true;
@@ -371,7 +381,7 @@ in
 
     # Networking
     networkmanagerapplet
-    nordvpn
+    openvpn
 
     # Education
     wireshark
@@ -511,18 +521,6 @@ in
   # powerManagement.powertop.enable = true;
 
   systemd.services = {
-    onedrive = {
-      description = "Onedrive Sync Service";
-      after = [ "network-online.target" ];
-      wantedBy = [ "multi-user.target" ];
-      serviceConfig = {
-        Type = "simple";
-        User = username;
-        ExecStart = "${pkgs.onedrive}/bin/onedrive --monitor";
-        Restart = "always";
-        RestartSec = 10;
-      };
-    };
     flatpak-repo = {
       path = [ pkgs.flatpak ];
       script = "flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo";
@@ -595,6 +593,7 @@ in
   };
 
   programs.hyprland.enable = true;
+  programs.hyprland.withUWSM = true;
 
   xdg.mime.defaultApplications = {
     # Web and HTML
